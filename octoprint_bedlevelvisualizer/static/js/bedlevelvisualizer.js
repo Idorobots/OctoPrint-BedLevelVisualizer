@@ -292,27 +292,8 @@ $(function () {
 					displaylogo: false,
 					showEditInChartStudio: true,
 					responsive: true,
-					plotlyServerURL: "https://chart-studio.plotly.com",
-					modeBarButtonsToRemove: ['resetCameraDefault3d'],
-					modeBarButtonsToAdd: [{
-						name: 'Move Nozzle',
-						icon: Plotly.Icons.autoscale,
-						toggle: true,
-						click: function(gd, ev) {
-								var button = ev.currentTarget;
-								var button_enabled = button._previousVal || false;
-								if (!button_enabled) {
-									gd.on('plotly_click', function(data) {
-											var gcode_command = 'G0 X' + data.points[0].x + ' Y' + data.points[0].y + ' F4000';
-											OctoPrint.control.sendGcode([gcode_command]);
-										});
-									button._previousVal = true;
-								} else {
-									gd.removeAllListeners('plotly_click');
-									button._previousVal = null;
-								}
-							}
-						}]};
+					plotlyServerURL: "https://chart-studio.plotly.com"
+					};
 
 				// calculate min/max value.
 				let s_min = Math.min(...mesh_data_z.flat());
